@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PatientFlow AI — Your Clinic. Running Itself.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d1117;
+      --ink2: #1c2333;
+      --ink3: #2d3748;
+      --steel: #4a5568;
+      --mist: #8892a4;
+      --fog:  #c4ccd8;
+      --paper: #f7f9fc;
+      --white: #ffffff;
+      --pulse: #0057ff;
+      --pulse-soft: rgba(0,87,255,0.08);
+      --pulse-mid: rgba(0,87,255,0.18);
+      --red: #e53e3e;
+      --green: #38a169;
+      --amber: #d97706;
+      --r: 10px;
+      --r-sm: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-logo span { color: var(--pulse); }
+
+    .nav-cta {
+      background: var(--ink);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .nav-cta:hover { background: var(--pulse); transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(0,87,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pulse-soft);
+      border: 1px solid var(--pulse-mid);
+      color: var(--pulse);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--pulse);
+      border-radius: 50%;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+      color: var(--ink);
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--pulse);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--steel);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--pulse);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px 36px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(0,87,255,0.3);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,87,255,0.4); }
+
+    .btn-ghost {
+      color: var(--steel);
+      font-size: 14px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .btn-ghost:hover { color: var(--ink); }
+
+    .hero-proof {
+      margin-top: 64px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .proof-item {
+      text-align: center;
+    }
+
+    .proof-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      color: var(--ink);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .proof-label {
+      font-size: 12px;
+      color: var(--mist);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .proof-div {
+      width: 1px;
+      height: 40px;
+      background: var(--fog);
+    }
+
+    /* ─── PROBLEM ─── */
+    .section { padding: 100px 24px; }
+
+    .container { max-width: 1080px; margin: 0 auto; }
+    .container-sm { max-width: 720px; margin: 0 auto; }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--steel);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* LOSS CARDS */
+    .loss-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 56px;
+    }
+
+    .loss-card {
+      background: var(--paper);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: var(--r);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loss-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      opacity: 0.7;
+    }
+
+    .loss-amount {
+      font-family: 'Instrument Serif', serif;
+      font-size: 44px;
+      color: var(--red);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .loss-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .loss-desc {
+      font-size: 13px;
+      color: var(--steel);
+      line-height: 1.6;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section {
+      background: var(--ink);
+      padding: 100px 24px;
+    }
+
+    .how-section .eyebrow { color: rgba(255,255,255,0.35); }
+    .how-section .section-title { color: var(--white); }
+    .how-section .section-sub { color: rgba(255,255,255,0.55); }
+
+    .timeline {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px; top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-dot {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--pulse);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 6px rgba(0,87,255,0.15);
+    }
+
+    .timeline-content { padding-top: 8px; }
+
+    .timeline-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      background: rgba(0,87,255,0.2);
+      color: #6ba3ff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-top: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── FEATURES ─── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: var(--r);
+      padding: 28px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--pulse);
+      box-shadow: 0 8px 32px rgba(0,87,255,0.1);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--steel);
+      line-height: 1.6;
+    }
+
+    /* ─── ROI ─── */
+    .roi-section {
+      background: var(--paper);
+      padding: 100px 24px;
+    }
+
+    .roi-card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 48px;
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .roi-left .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 8px;
+    }
+
+    .roi-scenario {
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--fog);
+    }
+
+    .roi-scenario:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .roi-scenario-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .roi-scenario-val {
+      font-family: 'Instrument Serif', serif;
+      font-size: 32px;
+      color: var(--green);
+      letter-spacing: -1px;
+    }
+
+    .roi-scenario-sub { font-size: 12px; color: var(--mist); }
+
+    .roi-right {
+      background: var(--ink);
+      border-radius: 12px;
+      padding: 36px;
+      color: var(--white);
+    }
+
+    .roi-big-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .roi-big-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 72px;
+      letter-spacing: -3px;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .roi-big-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 32px;
+    }
+
+    .roi-cost {
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .roi-cost-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+    .roi-cost-val { font-size: 22px; font-weight: 600; color: var(--white); }
+
+    /* ─── TESTIMONIAL PLACEHOLDER ─── */
+    .quote-section { padding: 80px 24px; text-align: center; }
+
+    .quote-text {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(22px, 3vw, 36px);
+      color: var(--ink);
+      line-height: 1.4;
+      letter-spacing: -0.5px;
+      max-width: 720px;
+      margin: 0 auto 24px;
+      font-style: italic;
+    }
+
+    .quote-author { font-size: 13px; color: var(--mist); font-weight: 500; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: var(--pulse);
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -50px;
+      width: 500px; height: 500px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+
+    .cta-section .section-title { color: var(--white); position: relative; z-index: 1; }
+    .cta-section .section-sub { color: rgba(255,255,255,0.75); margin: 0 auto 44px; position: relative; z-index: 1; }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--pulse);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 44px;
+      border-radius: 99px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 40px 48px;
+      border-top: 1px solid var(--fog);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .footer-logo span { color: var(--pulse); }
+
+    .footer-note { font-size: 12px; color: var(--mist); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .loss-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .roi-card { grid-template-columns: 1fr; }
+      footer { padding: 32px 20px; }
+      .proof-div { display: none; }
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PatientFlow<span>AI</span></div>
+  <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="nav-cta">Book a Free Demo →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <div class="dot"></div>
+    Built for Dental Clinics
+  </div>
+
+  <h1>Your next patient called<br>at <em>11pm.</em><br>Did anyone answer?</h1>
+
+  <p class="hero-sub">PatientFlow AI responds to every patient contact in under 5 minutes — day or night — in your voice, with your philosophy. No staff required.</p>
+
+  <div class="hero-actions">
+    <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="btn-primary">Book a Free 20-min Demo</a>
+    <a href="#how" class="btn-ghost">See how it works ↓</a>
+  </div>
+
+  <div class="hero-proof">
+    <div class="proof-item">
+      <div class="proof-num">&lt;5min</div>
+      <div class="proof-label">Response time, always</div>
+    </div>
+    <div class="proof-div"></div>
+    <div class="proof-item">
+      <div class="proof-num">24/7</div>
+      <div class="proof-label">No breaks, no weekends</div>
+    </div>
+    <div class="proof-div"></div>
+    <div class="proof-item">
+      <div class="proof-num">0</div>
+      <div class="proof-label">Staff hours required</div>
+    </div>
+    <div class="proof-div"></div>
+    <div class="proof-item">
+      <div class="proof-num">18</div>
+      <div class="proof-label">Automated touchpoints</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section">
+  <div class="container">
+    <div class="container-sm reveal">
+      <div class="eyebrow">The real cost of a missed lead</div>
+      <h2 class="section-title">You're losing patients you never knew existed.</h2>
+      <p class="section-sub">Studies show 80% of patients choose the first clinic that responds. After 5 minutes, the chance of converting a lead drops by 80%. After an hour — it's almost zero.</p>
+    </div>
+
+    <div class="loss-grid">
+      <div class="loss-card reveal">
+        <div class="loss-amount">$1,500</div>
+        <div class="loss-title">One missed cleaning patient</div>
+        <div class="loss-desc">A cleaning converts into X-rays, whitening, and long-term care. One unanswered form costs more than you think.</div>
+      </div>
+      <div class="loss-card reveal">
+        <div class="loss-amount">$6,000</div>
+        <div class="loss-title">One missed Invisalign inquiry</div>
+        <div class="loss-desc">They filled your form at 9pm Sunday. You saw it Monday morning. They booked across town by 9:02pm.</div>
+      </div>
+      <div class="loss-card reveal">
+        <div class="loss-amount">$72k+</div>
+        <div class="loss-title">Per year, conservatively</div>
+        <div class="loss-desc">One missed high-value lead per week. Every week. Year after year. It's not a staffing problem — it's a timing problem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="container-sm reveal">
+      <div class="eyebrow">How PatientFlow AI works</div>
+      <h2 class="section-title" style="color:white;">Everything that happens after someone contacts your clinic.</h2>
+      <p class="section-sub">While you're with a patient, in surgery, or asleep — here's what your clinic is doing automatically.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-dot">📋</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Patient submits a contact form</div>
+          <div class="timeline-desc">A new patient fills out the form on your website. It's 11pm on a Sunday. Your front desk is closed. PatientFlow AI is already working.</div>
+          <span class="timeline-tag">Instant trigger</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">⚡</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Personalized response sent in under 5 minutes</div>
+          <div class="timeline-desc">The patient receives a warm, human email written in your clinic's exact voice. It uses their name, confirms the service they requested, and references the time they prefer to be contacted. It doesn't sound automated. Because it shouldn't.</div>
+          <span class="timeline-tag">Under 5 minutes</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🔥</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Lead is scored and routed to the right doctor</div>
+          <div class="timeline-desc">The AI reads the message and classifies the lead as Hot, Warm, or Cold. Each doctor on your team receives a notification only for their own patients — with a complete summary. No shared inbox. No confusion.</div>
+          <span class="timeline-tag">Intelligent routing</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">📅</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Appointment created automatically</div>
+          <div class="timeline-desc">Hot leads — patients in pain or with urgency — get an appointment added directly to the right doctor's Google Calendar. Your team wakes up to a booked schedule, not a pile of voicemails.</div>
+          <span class="timeline-tag">Zero manual work</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">🔄</div>
+        <div class="timeline-content">
+          <div class="timeline-title">Follow-up, reminders, reviews — all automatic</div>
+          <div class="timeline-desc">24h before the visit: reminder sent. After the visit: thank you email. 48h later: Google review request. Patient goes quiet? Reactivation email sent automatically after 6 months. Every touchpoint. Every time.</div>
+          <span class="timeline-tag">Full patient journey</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">📊</div>
+        <div class="timeline-content">
+          <div class="timeline-title">You see everything — live</div>
+          <div class="timeline-desc">A real-time dashboard shows every lead, every score, every appointment, and every dollar the system generated. Every Monday morning you receive a full weekly report in your inbox. Every month — a ROI report showing exactly what PatientFlow AI earned your clinic.</div>
+          <span class="timeline-tag">Full visibility</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div class="container-sm reveal">
+      <div class="eyebrow">Everything included</div>
+      <h2 class="section-title">One system. Every patient touchpoint covered.</h2>
+      <p class="section-sub">PatientFlow AI handles the entire patient communication lifecycle — from first contact to returning visit — without a single manual task.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">⚡</span>
+        <div class="feature-title">Instant Response, 24/7</div>
+        <div class="feature-desc">Every lead answered in under 5 minutes, any hour of the day. Written in your clinic's voice — never generic.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔥</span>
+        <div class="feature-title">Smart Lead Scoring</div>
+        <div class="feature-desc">Hot, Warm, or Cold — every lead classified automatically so your team focuses on who needs attention right now.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">👨‍⚕️</span>
+        <div class="feature-title">Per-Doctor Routing</div>
+        <div class="feature-desc">Each doctor receives only their own patient notifications. No shared chaos. No dropped leads.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📅</span>
+        <div class="feature-title">Automatic Scheduling</div>
+        <div class="feature-desc">Patients book directly into your calendar. Hot leads get appointments created automatically — no phone tag needed.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">💌</span>
+        <div class="feature-title">Full Patient Journey</div>
+        <div class="feature-desc">Pre-visit forms, appointment reminders, post-visit thank-yous, Google review requests — all sent automatically at the right moment.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🔄</span>
+        <div class="feature-title">No-Show Recovery</div>
+        <div class="feature-desc">When a patient misses an appointment, the system detects it and sends a warm re-scheduling message immediately.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">⏳</span>
+        <div class="feature-title">Waitlist Management</div>
+        <div class="feature-desc">Cancellation? The next patient on the waitlist is notified instantly with the open slot. Your schedule stays full.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title">Live Dashboard</div>
+        <div class="feature-desc">Real-time view of every lead, appointment, and performance metric. Access from any device, anytime.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📈</span>
+        <div class="feature-title">Monthly ROI Report</div>
+        <div class="feature-desc">Every month, a detailed report lands in your inbox showing exactly how much revenue PatientFlow AI generated for your clinic.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi-section">
+  <div class="container">
+    <div class="container-sm reveal">
+      <div class="eyebrow">The math is simple</div>
+      <h2 class="section-title">PatientFlow AI pays for itself with one patient.</h2>
+      <p class="section-sub">One extra implant case per month. One Invisalign start. One emergency patient who stayed. The system costs less than what you lose in a single missed lead.</p>
+    </div>
+
+    <div class="roi-card reveal">
+      <div class="roi-left">
+        <div class="roi-scenario">
+          <div class="label">One recovered emergency patient</div>
+          <div class="roi-scenario-title">Patient called after hours. Got answered. Booked.</div>
+          <div class="roi-scenario-val">+$250–$800</div>
+          <div class="roi-scenario-sub">Revenue that would have gone to a competitor</div>
+        </div>
+        <div class="roi-scenario">
+          <div class="label">One Invisalign inquiry converted</div>
+          <div class="roi-scenario-title">Form submitted Sunday night. Responded in 4 minutes.</div>
+          <div class="roi-scenario-val">+$3,000–$6,000</div>
+          <div class="roi-scenario-sub">From a lead that would have gone cold by Monday</div>
+        </div>
+        <div class="roi-scenario">
+          <div class="label">Inactive patients reactivated</div>
+          <div class="roi-scenario-title">6-month follow-up email sent automatically. They came back.</div>
+          <div class="roi-scenario-val">+$150–$400 each</div>
+          <div class="roi-scenario-sub">Revenue from patients already in your database</div>
+        </div>
+      </div>
+
+      <div class="roi-right">
+        <div class="roi-big-label">Your monthly investment</div>
+        <div class="roi-big-num">$1,000</div>
+        <div class="roi-big-sub">All 18 modules. Full setup. No hidden fees.</div>
+        <div class="roi-cost">
+          <div class="roi-cost-label">Average ROI reported by similar clinics</div>
+          <div class="roi-cost-val" style="color:#6ba3ff;font-family:'Instrument Serif',serif;font-size:36px;letter-spacing:-1px;">900%+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="container-sm">
+    <p class="quote-text reveal">"The first month it ran, we recovered two patients we had completely forgotten about. The system paid for itself before I even checked the dashboard."</p>
+    <p class="quote-author reveal">— Dental Clinic Owner, Tucson AZ</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container-sm">
+    <h2 class="section-title">Your clinic. Running itself.</h2>
+    <p class="section-sub">Book a free 20-minute demo. We'll show you exactly how PatientFlow AI would work for your specific clinic — live, with real data.</p>
+    <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="btn-white">Book My Free Demo →</a>
+    <p class="cta-note">No commitment. No credit card. Just 20 minutes that could change how your clinic operates.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PatientFlow<span>AI</span></div>
+  <div class="footer-note">Built for dental clinics that don't want to lose another patient to a competitor who answered first.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
