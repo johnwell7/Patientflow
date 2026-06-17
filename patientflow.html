@@ -17,9 +17,9 @@
       --fog:  #c4ccd8;
       --paper: #f7f9fc;
       --white: #ffffff;
-      --pulse: #0057ff;
-      --pulse-soft: rgba(0,87,255,0.08);
-      --pulse-mid: rgba(0,87,255,0.18);
+      --pulse: #0077cc;
+      --pulse-soft: rgba(0,119,204,0.08);
+      --pulse-mid: rgba(0,119,204,0.18);
       --red: #e53e3e;
       --green: #38a169;
       --amber: #d97706;
@@ -42,9 +42,9 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 48px;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      border-bottom: 2px solid var(--pulse);
     }
 
     .nav-logo {
@@ -78,7 +78,7 @@
       justify-content: center;
       text-align: center;
       padding: 120px 24px 80px;
-      background: var(--white);
+      background: linear-gradient(160deg, #f0f6ff 0%, #ffffff 50%, #f0f8ff 100%);
       position: relative;
       overflow: hidden;
     }
@@ -157,10 +157,10 @@
       border-radius: 99px;
       text-decoration: none;
       transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 24px rgba(0,87,255,0.3);
+      box-shadow: 0 4px 24px rgba(0,119,204,0.3);
     }
 
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,87,255,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,119,204,0.4); }
 
     .btn-ghost {
       color: var(--steel);
@@ -211,6 +211,14 @@
     /* ─── PROBLEM ─── */
     .section { padding: 100px 24px; }
 
+    /* Blue accent sections */
+    .section-blue {
+      background: linear-gradient(135deg, #f0f6ff 0%, #e8f2ff 100%);
+      padding: 100px 24px;
+      border-top: 1px solid rgba(0,119,204,0.1);
+      border-bottom: 1px solid rgba(0,119,204,0.1);
+    }
+
     .container { max-width: 1080px; margin: 0 auto; }
     .container-sm { max-width: 720px; margin: 0 auto; }
 
@@ -219,8 +227,20 @@
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--mist);
+      color: var(--pulse);
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: var(--pulse);
+      border-radius: 2px;
     }
 
     .section-title {
@@ -293,7 +313,8 @@
       padding: 100px 24px;
     }
 
-    .how-section .eyebrow { color: rgba(255,255,255,0.35); }
+    .how-section .eyebrow { color: rgba(100,180,255,0.8); }
+    .how-section .eyebrow::before { background: rgba(100,180,255,0.6); }
     .how-section .section-title { color: var(--white); }
     .how-section .section-sub { color: rgba(255,255,255,0.55); }
 
@@ -378,6 +399,7 @@
     .feature-card {
       background: var(--white);
       border: 1px solid rgba(0,0,0,0.08);
+      border-left: 3px solid var(--pulse);
       border-radius: var(--r);
       padding: 28px;
       transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
@@ -385,7 +407,8 @@
 
     .feature-card:hover {
       border-color: var(--pulse);
-      box-shadow: 0 8px 32px rgba(0,87,255,0.1);
+      border-left-color: var(--pulse);
+      box-shadow: 0 8px 32px rgba(0,119,204,0.12);
       transform: translateY(-3px);
     }
 
@@ -633,8 +656,8 @@
   <p class="hero-sub">PatientFlow AI responds to every patient contact in under 5 minutes — day or night — in your voice, with your philosophy. No staff required.</p>
 
   <div class="hero-actions">
-    <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="btn-primary">Book a Free 20-min Demo</a>
-    <a href="#how" class="btn-ghost">See how it works ↓</a>
+    <a href="#pricing" class="btn-primary">Start Now — $797/mo →</a>
+    <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="btn-ghost">Book a free demo first ↓</a>
   </div>
 
   <div class="hero-proof">
@@ -661,7 +684,7 @@
 </section>
 
 <!-- PROBLEM -->
-<section class="section">
+<section class="section-blue">
   <div class="container">
     <div class="container-sm reveal">
       <div class="eyebrow">The real cost of a missed lead</div>
@@ -757,7 +780,7 @@
 </section>
 
 <!-- FEATURES -->
-<section class="section">
+<section class="section-blue">
   <div class="container">
     <div class="container-sm reveal">
       <div class="eyebrow">Everything included</div>
@@ -848,7 +871,7 @@
 
       <div class="roi-right">
         <div class="roi-big-label">Your monthly investment</div>
-        <div class="roi-big-num">$1,000</div>
+        <div class="roi-big-num">$797</div>
         <div class="roi-big-sub">All 18 modules. Full setup. No hidden fees.</div>
         <div class="roi-cost">
           <div class="roi-cost-label">Average ROI reported by similar clinics</div>
@@ -867,13 +890,59 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:var(--paper); padding:80px 24px;">
+  <div class="container-sm" style="text-align:center;">
+    <div class="eyebrow">Simple pricing</div>
+    <h2 class="section-title reveal">Everything included. No surprises.</h2>
+    <p class="section-sub reveal" style="margin:0 auto 48px;">One flat monthly fee. All 18 modules active from day one. Cancel anytime after the first 6 months.</p>
+
+    <div class="reveal" style="background:var(--white);border:1px solid rgba(0,0,0,0.08);border-radius:20px;padding:48px;max-width:480px;margin:0 auto;box-shadow:0 16px 48px rgba(0,119,204,0.08);">
+      <div style="font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--mist);margin-bottom:16px;">Monthly Plan</div>
+      <div style="font-family:'Instrument Serif',serif;font-size:80px;letter-spacing:-4px;color:var(--ink);line-height:1;">$797</div>
+      <div style="font-size:14px;color:var(--mist);margin-bottom:32px;">/month · 6-month minimum</div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:36px;text-align:left;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--steel);">
+          <span style="color:var(--pulse);font-size:16px;">✓</span> All 18 automation modules
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--steel);">
+          <span style="color:var(--pulse);font-size:16px;">✓</span> Custom setup for your clinic
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--steel);">
+          <span style="color:var(--pulse);font-size:16px;">✓</span> Live dashboard with AI analysis
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--steel);">
+          <span style="color:var(--pulse);font-size:16px;">✓</span> Monthly ROI report
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--steel);">
+          <span style="color:var(--pulse);font-size:16px;">✓</span> HIPAA-compliant architecture
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--steel);">
+          <span style="color:var(--pulse);font-size:16px;">✓</span> Ongoing support and updates
+        </div>
+      </div>
+
+      <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank"
+        style="display:block;background:var(--pulse);color:white;font-size:16px;font-weight:700;padding:18px 32px;border-radius:99px;text-decoration:none;text-align:center;box-shadow:0 8px 24px rgba(0,119,204,0.3);transition:transform 0.15s;">
+        Start Now — $797/mo →
+      </a>
+
+      <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank"
+        style="display:block;margin-top:14px;font-size:13px;color:var(--mist);text-decoration:none;text-align:center;">
+        or book a free demo first
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section">
   <div class="container-sm">
     <h2 class="section-title">Your clinic. Running itself.</h2>
     <p class="section-sub">Book a free 20-minute demo. We'll show you exactly how PatientFlow AI would work for your specific clinic — live, with real data.</p>
-    <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="btn-white">Book My Free Demo →</a>
-    <p class="cta-note">No commitment. No credit card. Just 20 minutes that could change how your clinic operates.</p>
+    <a href="https://calendly.com/johnnywendell48/patientflow-ai" target="_blank" class="btn-white">Book a Free Demo →</a>
+    <p class="cta-note">Already seen enough? <a href="#pricing" style="color:rgba(255,255,255,0.9);font-weight:600;">Get started at $797/mo ↑</a></p>
   </div>
 </section>
 
