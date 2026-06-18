@@ -1764,6 +1764,43 @@
   });
 </script>
 
+<!-- LEAD CAPTURE MODAL -->
+<div id="leadModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+  <div class="glass rounded-2xl p-8 max-w-md w-full relative pricing-glow">
+    <button id="modalClose" class="absolute top-4 right-4 text-[#a8a59c] hover:text-[#f0ede4] text-xl"><i class="fa-solid fa-xmark"></i></button>
+    
+    <div class="text-center mb-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7dd3a8]/15 text-xs uppercase tracking-wider text-[#7dd3a8] mb-4">
+        <span class="pulse-dot"></span> Only 7 spots left
+      </div>
+      <h3 class="font-display text-2xl text-[#f0ede4] mb-2">Book Your Private Demo</h3>
+      <p class="text-sm text-[#a8a59c]">Enter your details. We'll review your practice's current setup and send a link to schedule the live walkthrough.</p>
+    </div>
+
+    <form id="leadForm" class="space-y-4">
+      <div>
+        <label class="text-xs uppercase tracking-wider text-[#6b6f6d]">Your Name</label>
+        <input type="text" required class="w-full mt-1 px-4 py-3 rounded-lg bg-[#0a0e0d]/60 border border-[#d4a574]/20 text-[#f0ede4] focus:outline-none focus:border-[#d4a574]" placeholder="Dr. John Smith">
+      </div>
+      <div>
+        <label class="text-xs uppercase tracking-wider text-[#6b6f6d]">Practice Name</label>
+        <input type="text" required class="w-full mt-1 px-4 py-3 rounded-lg bg-[#0a0e0d]/60 border border-[#d4a574]/20 text-[#f0ede4] focus:outline-none focus:border-[#d4a574]" placeholder="Smile Dental Clinic">
+      </div>
+      <div>
+        <label class="text-xs uppercase tracking-wider text-[#6b6f6d]">Work Email</label>
+        <input type="email" required class="w-full mt-1 px-4 py-3 rounded-lg bg-[#0a0e0d]/60 border border-[#d4a574]/20 text-[#f0ede4] focus:outline-none focus:border-[#d4a574]" placeholder="dr@smiledental.com">
+      </div>
+      <button type="submit" class="btn-primary w-full mt-4 px-6 py-3.5 rounded-lg text-base">
+        Request Demo Link <i class="fa-solid fa-arrow-right ml-2"></i>
+      </button>
+      <p class="text-[10px] text-center text-[#6b6f6d] mt-3">
+        <i class="fa-solid fa-shield-halved mr-1 text-[#7dd3a8]"></i>
+        HIPAA Compliant · No spam · 100% Secure
+      </p>
+    </form>
+  </div>
+</div>
+
 <!-- Toast -->
 <div id="toast" class="toast">
   <div class="flex items-center gap-3">
@@ -1900,23 +1937,50 @@
 
   [leadsSlider, respSlider, ltvSlider, nsSlider].forEach(s => s.addEventListener('input', calcROI));
   calcROI();
-
-  // ============= DEMO BUTTONS =============
+ 
+ // ============= DEMO BUTTONS & MODAL =============
   const toast = document.getElementById('toast');
+  const leadModal = document.getElementById('leadModal');
+  const modalClose = document.getElementById('modalClose');
+  const leadForm = document.getElementById('leadForm');
+  const body = document.body;
+
   const showToast = (title, msg) => {
     document.getElementById('toastTitle').textContent = title;
     document.getElementById('toastMsg').textContent = msg;
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+    setTimeout(() => toast.classList.remove('show'), 5000);
   };
 
-  document.getElementById('bookDemoBtn').addEventListener('click', (e) => {
+  const openModal = (e) => {
     e.preventDefault();
-    showToast('Demo request received', 'We\'ll reach out within 24 hours to schedule your live walkthrough.');
-  });
-  document.getElementById('finalBookBtn').addEventListener('click', (e) => {
+    leadModal.classList.remove('hidden');
+    leadModal.classList.add('flex');
+    body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    leadModal.classList.add('hidden');
+    leadModal.classList.remove('flex');
+    body.style.overflow = '';
+  };
+
+  // Abrir modal com qualquer botão que tenha ID bookDemoBtn ou finalBookBtn
+  document.getElementById('bookDemoBtn').addEventListener('click', openModal);
+  document.getElementById('finalBookBtn').addEventListener('click', openModal);
+  modalClose.addEventListener('click', closeModal);
+  leadModal.addEventListener('click', (e) => { if (e.target === leadModal) closeModal(); });
+
+  // Processar formulário (Aqui você integra com Make.com/Webhook depois)
+  leadForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    showToast('Demo request received', 'Lock in your Q1 spot — we\'ll contact you within 24 hours.');
+    const formData = new FormData(leadForm);
+    const name = formData.get('name') || 'Doctor'; // Pega o nome se preenchido
+    
+    // Simulação de envio. No futuro, coloque aqui o fetch() pro seu Webhook do Make.com
+    closeModal();
+    showToast('Demo request received!', `Thank you, ${name}. Check your email for the scheduling link.`);
+    leadForm.reset();
   });
 
   // ============= ACTIVITY FEED ROTATION =============
