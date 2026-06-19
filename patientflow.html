@@ -435,19 +435,19 @@
 </div>
 
 <!-- HERO -->
-<section id="top" class="relative min-h-[92vh] flex items-center pt-16 pb-24 overflow-hidden">
+<section id="top" class="relative min-h-screen lg:min-h-[92vh] flex items-center pt-10 pb-16 lg:pt-16 lg:pb-24 overflow-hidden">
   <div class="hero-mesh"></div>
   <div class="absolute inset-0 grid-pattern"></div>
   
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-[1.15fr_1fr] gap-16 items-center w-full">
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-16 items-center w-full">
     <!-- Left -->
     <div>
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs uppercase tracking-[0.2em] text-[#d4a574] mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#d4a574] mb-6 sm:mb-8">
         <span class="pulse-dot"></span>
         Built for U.S. Dental Practices · HIPAA-Compliant
       </div>
 
-      <h1 class="font-display headline text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-light text-[#f0ede4]">
+      <h1 class="font-display headline text-[2.5rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-light text-[#f0ede4]">
         Your front desk<br>
         <span class="text-gold-gradient italic font-normal">never sleeps,</span><br>
         never misses,<br>
@@ -486,63 +486,63 @@
     </div>
 
     <!-- Right: Live system preview -->
-    <div class="relative">
-      <div class="glass rounded-2xl p-6 shadow-2xl">
+    <div class="relative mt-4 lg:mt-0">
+      <div class="glass rounded-2xl p-4 sm:p-6 shadow-2xl">
         <div class="flex items-center justify-between mb-5">
           <div class="flex items-center gap-2">
             <span class="pulse-dot"></span>
-            <span class="text-xs uppercase tracking-[0.2em] text-[#7dd3a8]">Live System Activity</span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#7dd3a8]">Live System Activity</span>
           </div>
-          <span class="text-xs text-[#6b6f6d] font-mono" id="liveTime">--:--:--</span>
+          <span class="text-[10px] sm:text-xs text-[#6b6f6d] font-mono" id="liveTime">--:--:--</span>
         </div>
 
-        <div class="grid grid-cols-3 gap-3 mb-5">
-          <div class="rounded-xl bg-[#0a0e0d]/60 p-4 border border-[#d4a574]/10">
-            <div class="text-2xl font-display text-[#d4a574] stat-num" data-target="247">0</div>
-            <div class="text-[10px] uppercase tracking-wider text-[#a8a59c] mt-1">Leads / Mo</div>
+        <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
+          <div class="rounded-xl bg-[#0a0e0d]/60 p-3 sm:p-4 border border-[#d4a574]/10">
+            <div class="text-xl sm:text-2xl font-display text-[#d4a574] stat-num" data-target="247">0</div>
+            <div class="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#a8a59c] mt-1">Leads / Mo</div>
           </div>
-          <div class="rounded-xl bg-[#0a0e0d]/60 p-4 border border-[#d4a574]/10">
-            <div class="text-2xl font-display text-[#7dd3a8] stat-num" data-target="68">0</div><span class="text-[#7dd3a8]">%</span>
-            <div class="text-[10px] uppercase tracking-wider text-[#a8a59c] mt-1">Show-up Rate</div>
+          <div class="rounded-xl bg-[#0a0e0d]/60 p-3 sm:p-4 border border-[#d4a574]/10">
+            <div class="text-xl sm:text-2xl font-display text-[#7dd3a8] stat-num" data-target="68">0</div><span class="text-[#7dd3a8] text-sm">%</span>
+            <div class="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#a8a59c] mt-1">Show-up Rate</div>
           </div>
-          <div class="rounded-xl bg-[#0a0e0d]/60 p-4 border border-[#d4a574]/10">
-            <div class="text-2xl font-display text-[#e8c290] stat-num">$</div><span class="stat-num" data-target="42">0</span><span class="text-[#e8c290]">k</span>
-            <div class="text-[10px] uppercase tracking-wider text-[#a8a59c] mt-1">Added Revenue</div>
+          <div class="rounded-xl bg-[#0a0e0d]/60 p-3 sm:p-4 border border-[#d4a574]/10">
+            <div class="text-xl sm:text-2xl font-display text-[#e8c290]">$</div><span class="stat-num text-xl sm:text-2xl font-display text-[#e8c290]" data-target="42">0</span><span class="text-[#e8c290] text-sm">k</span>
+            <div class="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#a8a59c] mt-1">Added Revenue</div>
           </div>
         </div>
 
         <!-- Activity feed -->
         <div class="space-y-2.5 text-sm" id="activityFeed">
           <div class="flex items-start gap-3 p-3 rounded-lg bg-[#0a0e0d]/40">
-            <div class="w-8 h-8 rounded-full bg-[#7dd3a8]/15 flex items-center justify-center flex-shrink-0">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#7dd3a8]/15 flex items-center justify-center flex-shrink-0">
               <i class="fa-solid fa-phone text-[#7dd3a8] text-xs"></i>
             </div>
             <div class="flex-1">
-              <div class="text-[#f0ede4] text-[13px]"><span class="text-[#7dd3a8]">New lead</span> — Inbound call from patient</div>
-              <div class="text-[11px] text-[#6b6f6d] mt-0.5">Classified as <span class="text-[#e8856b] font-medium">HOT</span> · Auto-scheduled in 2.4 min</div>
+              <div class="text-[#f0ede4] text-[12px] sm:text-[13px]"><span class="text-[#7dd3a8]">New lead</span> — Inbound call from patient</div>
+              <div class="text-[10px] sm:text-[11px] text-[#6b6f6d] mt-0.5">Classified as <span class="text-[#e8856b] font-medium">HOT</span> · Auto-scheduled in 2.4 min</div>
             </div>
           </div>
           <div class="flex items-start gap-3 p-3 rounded-lg bg-[#0a0e0d]/40">
-            <div class="w-8 h-8 rounded-full bg-[#d4a574]/15 flex items-center justify-center flex-shrink-0">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#d4a574]/15 flex items-center justify-center flex-shrink-0">
               <i class="fa-solid fa-envelope text-[#d4a574] text-xs"></i>
             </div>
             <div class="flex-1">
-              <div class="text-[#f0ede4] text-[13px]">24h follow-up sent to [Patient_Name]</div>
-              <div class="text-[11px] text-[#6b6f6d] mt-0.5">Marked as contacted · Sheet updated</div>
+              <div class="text-[#f0ede4] text-[12px] sm:text-[13px]">24h follow-up sent to [Patient_Name]</div>
+              <div class="text-[10px] sm:text-[11px] text-[#6b6f6d] mt-0.5">Marked as contacted · Sheet updated</div>
             </div>
           </div>
           <div class="flex items-start gap-3 p-3 rounded-lg bg-[#0a0e0d]/40">
-            <div class="w-8 h-8 rounded-full bg-[#e8856b]/15 flex items-center justify-center flex-shrink-0">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#e8856b]/15 flex items-center justify-center flex-shrink-0">
               <i class="fa-solid fa-calendar-check text-[#e8856b] text-xs"></i>
             </div>
             <div class="flex-1">
-              <div class="text-[#f0ede4] text-[13px]">No-show detected · Recovery message sent</div>
-              <div class="text-[11px] text-[#6b6f6d] mt-0.5">Reschedule link delivered · 2 slots reopened</div>
+              <div class="text-[#f0ede4] text-[12px] sm:text-[13px]">No-show detected · Recovery message sent</div>
+              <div class="text-[10px] sm:text-[11px] text-[#6b6f6d] mt-0.5">Reschedule link delivered · 2 slots reopened</div>
             </div>
           </div>
         </div>
 
-        <div class="mt-5 pt-4 border-t border-[#d4a574]/10 flex items-center justify-between text-xs text-[#6b6f6d]">
+        <div class="mt-5 pt-4 border-t border-[#d4a574]/10 flex items-center justify-between text-[10px] sm:text-xs text-[#6b6f6d]">
           <span>Updating in real time</span>
           <span class="font-mono">SYSTEM_v3.2 · OPERATIONAL</span>
         </div>
