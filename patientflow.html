@@ -1293,48 +1293,56 @@
       </h2>
     </div>
 
-    <div class="reveal overflow-x-auto">
-      <table class="w-full text-left border-collapse min-w-[600px]">
-        <thead>
-          <tr class="border-b border-[#d4a574]/20">
-            <th class="py-4 px-4 text-sm uppercase tracking-wider text-[#a8a59c] font-medium">Capability</th>
-            <th class="py-4 px-4 text-sm uppercase tracking-wider text-[#7dd3a8] font-bold bg-[#7dd3a8]/5 rounded-tl-xl">PatientFlow AI</th>
-            <th class="py-4 px-4 text-sm uppercase tracking-wider text-[#6b6f6d] font-medium">Legacy CRMs (Weave, RevenueWell)</th>
-          </tr>
-        </thead>
-        <tbody class="text-sm">
-          <tr class="border-b border-[#d4a574]/10">
-            <td class="py-4 px-4 text-[#f0ede4]">AI Lead Classification (Hot/Warm/Cold)</td>
-            <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
-            <td class="py-4 px-4 text-center text-[#e8856b]"><i class="fa-solid fa-xmark"></i></td>
-          </tr>
-          <tr class="border-b border-[#d4a574]/10">
-            <td class="py-4 px-4 text-[#f0ede4]">Instant 5-Minute Custom Email Routing</td>
-            <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
-            <td class="py-4 px-4 text-center text-[#e8856b]"><i class="fa-solid fa-xmark"></i></td>
-          </tr>
-          <tr class="border-b border-[#d4a574]/10">
-            <td class="py-4 px-4 text-[#f0ede4]">Automated No-Show Recovery & Waitlist Fill</td>
-            <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
-            <td class="py-4 px-4 text-center text-[#a8a59c]">Manual / Clunky</td>
-          </tr>
-          <tr class="border-b border-[#d4a574]/10">
-            <td class="py-4 px-4 text-[#f0ede4]">Real-time AI Business Intelligence Reports</td>
-            <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
-            <td class="py-4 px-4 text-center text-[#e8856b]"><i class="fa-solid fa-xmark"></i></td>
-          </tr>
-          <tr class="border-b border-[#d4a574]/10">
-            <td class="py-4 px-4 text-[#f0ede4]">True HIPAA Tokenization (AI never sees PHI)</td>
-            <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
-            <td class="py-4 px-4 text-center text-[#a8a59c]">Partial</td>
-          </tr>
-          <tr>
-            <td class="py-4 px-4 text-[#f0ede4] font-semibold">Average Monthly Cost</td>
-            <td class="py-4 px-4 text-center text-[#7dd3a8] font-bold bg-[#7dd3a8]/10 rounded-bl-xl">$797/mo</td>
-            <td class="py-4 px-4 text-center text-[#e8856b] font-bold">$500 - $1,200/mo+</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Mobile Swipe Hint -->
+    <div class="sm:hidden flex items-center justify-end gap-2 mb-2 text-xs text-[#d4a574] font-medium animate-pulse">
+      <span>Swipe to compare</span>
+      <i class="fa-solid fa-arrow-right"></i>
+    </div>
+
+    <div class="reveal relative">
+      <div class="overflow-x-auto pb-4">
+        <table class="w-full text-left border-collapse min-w-[600px]">
+          <thead>
+            <tr class="border-b border-[#d4a574]/20">
+              <th class="py-4 px-4 text-sm uppercase tracking-wider text-[#a8a59c] font-medium">Capability</th>
+              <th class="py-4 px-4 text-sm uppercase tracking-wider text-[#7dd3a8] font-bold bg-[#7dd3a8]/5 rounded-tl-xl">PatientFlow AI</th>
+              <th class="py-4 px-4 text-sm uppercase tracking-wider text-[#6b6f6d] font-medium">Legacy CRMs (Weave, RevenueWell)</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm">
+            <tr class="border-b border-[#d4a574]/10">
+              <td class="py-4 px-4 text-[#f0ede4]">AI Lead Classification (Hot/Warm/Cold)</td>
+              <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-4 text-center text-[#e8856b]"><i class="fa-solid fa-xmark"></i></td>
+            </tr>
+            <tr class="border-b border-[#d4a574]/10">
+              <td class="py-4 px-4 text-[#f0ede4]">Instant 5-Minute Custom Email Routing</td>
+              <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-4 text-center text-[#e8856b]"><i class="fa-solid fa-xmark"></i></td>
+            </tr>
+            <tr class="border-b border-[#d4a574]/10">
+              <td class="py-4 px-4 text-[#f0ede4]">Automated No-Show Recovery & Waitlist Fill</td>
+              <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-4 text-center text-[#a8a59c]">Manual / Clunky</td>
+            </tr>
+            <tr class="border-b border-[#d4a574]/10">
+              <td class="py-4 px-4 text-[#f0ede4]">Real-time AI Business Intelligence Reports</td>
+              <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-4 text-center text-[#e8856b]"><i class="fa-solid fa-xmark"></i></td>
+            </tr>
+            <tr class="border-b border-[#d4a574]/10">
+              <td class="py-4 px-4 text-[#f0ede4]">True HIPAA Tokenization (AI never sees PHI)</td>
+              <td class="py-4 px-4 text-center text-[#7dd3a8] bg-[#7dd3a8]/5"><i class="fa-solid fa-check"></i></td>
+              <td class="py-4 px-4 text-center text-[#a8a59c]">Partial</td>
+            </tr>
+            <tr>
+              <td class="py-4 px-4 text-[#f0ede4] font-semibold">Average Monthly Cost</td>
+              <td class="py-4 px-4 text-center text-[#7dd3a8] font-bold bg-[#7dd3a8]/10 rounded-bl-xl">$797/mo</td>
+              <td class="py-4 px-4 text-center text-[#e8856b] font-bold">$500 - $1,200/mo+</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </section>
@@ -1926,7 +1934,7 @@
 
     const totalPatients = Math.floor(recoveredContacts + noShowRecoveries + reactivations);
     const totalRevenue = totalPatients * ltv;
-    const investment = 1297;
+    const investment = 500 + (797 * 6); // Cálculo real de 6 meses nos bastimentos: $5,282
     const roiMultiple = (totalRevenue / investment).toFixed(1);
 
     // Animated number update
