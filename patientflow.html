@@ -1938,7 +1938,7 @@
     revenueResult.textContent = '$' + totalRevenue.toLocaleString();
     patientsResult.textContent = totalPatients.toLocaleString();
     roiResult.textContent = roiMultiple + 'x';
-    roiCopy.textContent = `For every $1 invested, PatientFlow returns {roiMultiple}x in 6 months.`;
+    roiCopy.textContent = `For every $1 invested, PatientFlow returns ${roiMultiple}x in 6 months.`;
   }
 
   [leadsSlider, respSlider, ltvSlider, nsSlider].forEach(s => s.addEventListener('input', calcROI));
